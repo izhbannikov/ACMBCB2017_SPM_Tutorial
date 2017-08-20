@@ -1,19 +1,22 @@
 #Example3.R
+#Model with time-dependent parameters
 
 library(stpm)
 
-# Starting parameters:
-model.par <- list(a=-0.05, f1=90, Q=1e-6, f=80, b=5, mu0=1e-5, theta=0.1)
+# Reading raw data
+raw.data <- read.csv(system.file("extdata", "longdat.csv", package="stpm"))
+head(raw.data)
 
-# Data simulation:
-data <- spm_projection(model.par, N=5000, ystart=80, model="discrete")
+#Prepare data for optimization
+data <- prepare_data(x=system.file("extdata", "longdat.csv", package="stpm"), 
+                     col.id = "ID", col.status = "IndicatorDeath", 
+                     col.age = "Age", 
+                     covariates = "DBP", 
+                     impute=FALSE)
 
-# Print some data:
-head(data$data)
+pars <- spm_time_dep(x=data[[1]], 
+                     start = list(a = -0.05, f1 = 80, Q = 2e-08, f = 80, 
+                                          b = 5, mu0 = 0.001),
+                     frm = list(at = "a", f1t = "f1", Qt = "Q", 
+                                ft = "f", bt = "b", mu0t = "mu0"))
 
-# Mean of covariates by age:
-data$stat$mean.by.age
-
-# Plot survival probabilities:
-plot(data$stat$srv.prob, xlab="Years",ylab="Percent survival")
-     

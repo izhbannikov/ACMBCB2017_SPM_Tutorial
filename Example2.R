@@ -1,4 +1,5 @@
 #Example2.R
+#Quick start
 
 library(stpm)
 
@@ -14,6 +15,3 @@ data <- prepare_data(x=system.file("extdata", "longdat.csv", package="stpm"))
 p.discr.model <- spm(data)
 p.discr.model
                                     
-# Continuous-time model:
-p.cont.model <- spm(data, model="continuous")
-p.cont.model

@@ -1,4 +1,6 @@
 #Example5.R
+#Evaluating genetic effects
+
 library(stpm) 
 
 data(ex_spmcon1dg)
