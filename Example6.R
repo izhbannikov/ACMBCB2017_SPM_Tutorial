@@ -9,10 +9,10 @@ library(stpm)
 # Data preparation #
 data <- simdata_discr(N=1000, dt = 2)
 
-miss.id <- sample(x=dim(data)[1], size=round(dim(data)[1]/4)) # ~25% missing data
+miss.id <- sample(x=2:dim(data)[1], size=round(dim(data)[1]/4)) # ~25% missing data
 incomplete.data <- data
 incomplete.data[miss.id,5] <- NA
-incomplete.data[miss.id,6] <- NA
+incomplete.data[miss.id-1,6] <- NA
 # End of data preparation #
 
 # Estimate parameters from the complete dataset #

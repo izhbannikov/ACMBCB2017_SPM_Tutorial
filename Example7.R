@@ -21,7 +21,7 @@ data <- simdata_discr(N=1000, a=a, f1=f1, Q=Q, f=f0, b=b, ystart=ystart, mu0 = m
 
 # Delete some observations in order to have approx. 25% missing data
 incomplete.data <- data
-miss.id <- sample(x=dim(data)[1], size=round(dim(data)[1]/4)) 
+miss.id <- sample(x=2:dim(data)[1], size=round(dim(data)[1]/4)) 
 incomplete.data <- data
 incomplete.data[miss.id,5] <- NA
 incomplete.data[miss.id-1,6] <- NA
